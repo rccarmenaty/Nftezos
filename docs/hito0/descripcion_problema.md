@@ -1,4 +1,4 @@
-#NFTezos
+# NFTezos
 
 Tezos se ha convertido en una de las cadenas de bloques (blockchains) más populares del mundo para tokens no fungibles (NFTs). Durante el curso del último año (2021), hubo un notable incremento en el interés por el impacto medioambiental de las tecnologías de cadenas de bloques, con Bitcoin a la cabeza y su mecanismo de consenso Pow. Como tal, gran parte del ascenso de Tezos se puede atribuir a su reputación como una alternativa ecológica a otras que son mucho más intensivas en el consumo de energía.
 
