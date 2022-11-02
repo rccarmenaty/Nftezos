@@ -1,3 +1,3 @@
 # Nftezos
 
-Repositorio para practica y proyecto de la asignatura "Cloud Computing" del Master en Ingenieria Informatica de la Universidad de Granada, curso 22-23.
+Repositorio para práctica y proyecto de la asignatura "Cloud Computing" del Master en Ingeniería Informática de la Universidad de Granada, curso 22-23.
