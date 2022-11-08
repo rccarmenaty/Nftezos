@@ -1,5 +1,8 @@
-# NFTezos
+# TravelShare
 
-Tezos se ha convertido en una de las cadenas de bloques (blockchains) más populares del mundo para tokens no fungibles (NFTs). Durante el curso del último año (2021), hubo un notable incremento en el interés por el impacto medioambiental de las tecnologías de cadenas de bloques, con Bitcoin a la cabeza y su mecanismo de consenso Pow. Como tal, gran parte del ascenso de Tezos se puede atribuir a su reputación como una alternativa ecológica a otras que son mucho más intensivas en el consumo de energía.
+### Descripción del problema
+Cuando salimos o vamos de viaje con amigas y amigos cercanos, es muy común pagar cuentas conjuntas o compartir los gastos realizados por todos los integrantes del grupo. Este proceso puede llegar a ser engorroso y en ocasiones molesto, especialmente entre personas que no poseen métodos de pago compatible o simplemente no tienen manera de saldar en el momento alguna deuda contraída.
 
-Al igual que con otras cadenas de bloques, existe una amplia gama de lugares en los que las personas pueden intercambiar NFTs en Tezos. Lo que se pretende con esta aplicación es agrupar y hacer más fácil descubrir obras y colecciones expuestas en varias plataformas sobre la cadena de bloques Tezos utilizando criterios de búsqueda a definir y brindar la posibilidad de tener un feed personalizado de acuerdo a los intereses de cada usuario.
+
+### Solución propuesta
+Se propone la realización de una aplicación que lleve un histórico de gastos y pagos realizados por cada integrante de un grupo, así como las deudas que cada integrante tiene con cada persona restante del grupo, para que al finalizar el viaje o actividad desarrollada, se cuente con información precisa sobre como saldar las deudas contraídas anteriormente.
