@@ -1,9 +1,22 @@
+require("dotenv").config({ path: "./config.env" });
+
 const express = require("express");
 const app = express();
+const connectDB = require("./config/db");
+
+const { protect } = require("./middleware/auth");
+
+connectDB();
 
 app.use(express.json());
 
-const server = app.listen(5000, async () => {
+app.use("/api/auth", require("./routes/auth"));
+
+app.use(protect);
+
+const PORT = process.env.PORT || 5000;
+
+const server = app.listen(PORT, async () => {
   console.log(`up and running on ${PORT}`);
 });
 
