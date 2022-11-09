@@ -1,12 +1,14 @@
 # TravelShare
 
-Repositorio para practica y proyecto de la asignatura "Cloud Computing" del Master en Ingenieria Informatica de la Universidad de Granada, curso 22-23.
+Repositorio para practica y proyecto de la asignatura "Cloud Computing" del Master en Ingenieria Informática de la Universidad de Granada, curso 22-23.
 
 ## Hito 1
 
 ### Concretando y planificando el proyecto.
 
 En este hito, como resultado de la planificación del proyecto, se definen las historias de usuario así como milestones que serán la guía del desarrollo.
+
+Se establece MVC (Modelo-Vista-Controlador) como arquitectura del proyecto, debido las ventajas que ofrece en cuanto a la separación de responsabilidades y modularización entre las diferentes capas, contribuyendo así a un mejor despliegue sobre tecnologías cloud.
 
 Se han definido los siguientes milestones:
 
