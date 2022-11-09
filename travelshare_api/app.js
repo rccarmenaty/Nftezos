@@ -4,15 +4,13 @@ const express = require("express");
 const app = express();
 const connectDB = require("./config/db");
 
-const { protect } = require("./middleware/auth");
-
 connectDB();
 
 app.use(express.json());
 
 app.use("/api/auth", require("./routes/auth"));
 
-app.use(protect);
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
@@ -25,4 +23,3 @@ process.on("unhandledRejection", (reason, promise) => {
 
   server.close(() => process.exit(1));
 });
-module.exports = app;

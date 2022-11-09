@@ -35,6 +35,115 @@ exports.register = async (req, res, next) => {
     return next(new Error("Error al crear el usuario"));
   }
 };
+exports.login = async (req, res, next) => {
+  const { username, password } = req.body;
+
+  if (!username || !password) {
+    return next(
+      new ErrorResponse("Especifique nombre de ususario y contraseña", 400)
+    );
+  }
+
+  try {
+    const user = await User.findOne({ where: { username } });
+
+    if (!user)
+      return next(
+        new ErrorResponse("Nombre de usuario o contraseña incorrectos", 401)
+      );
+
+    const isMatch = await user.matchPasswords(password);
+
+    if (!isMatch) {
+      return next(
+        new ErrorResponse("Nombre de usuario o contraseña incorrectos", 401)
+      );
+    }
+
+    sendToken(user, 200, res);
+  } catch (error) {
+    return next(new ErrorResponse("Error Interno"));
+  }
+};
+
+exports.refreshToken = async (req, res, next) => {
+  const { refreshToken } = req.body;
+  const user = req.user;
+
+  try {
+    const token = await Token.findOne({ where: { uuid: user.uuid } });
+
+    if (token.token !== refreshToken)
+      return next(new ErrorResponse("Tokens not matching"));
+  } catch (error) {
+    return next(new ErrorResponse("Database Error"));
+  }
+
+  try {
+    const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH);
+    if (decoded.id !== user.uuid)
+      return next(new ErrorResponse("User unknown"));
+    res.status(304).json("Unmodified");
+  } catch (err) {
+    if (err.name === "TokenExpiredError") {
+      sendToken(user, 201, res);
+    } else {
+      res.status(500).json("Error: " + err);
+    }
+  }
+};
+
+exports.logout = async (req, res, next) => {
+  const user = req.user;
+
+  const savedToken = await Token.update(
+    {
+      token: "",
+      uuid: user.uuid,
+    },
+    {
+      where: { uuid: user.uuid },
+    }
+  );
+
+  if (!savedToken) res.status(500).json("Error accesing database");
+  else res.status(200).json("Logged out correctly");
+};
+
+exports.forgotpassword = (req, res, next) => {
+  res.send("Forgot Password Route");
+};
+
+exports.resetpassword = (req, res, next) => {
+  res.send("Reset Password Route");
+};
+
+exports.info = (req, res, next) => {
+  res.send("ALl good INFO");
+};
+
+const sendToken = async (user, statusCode, res) => {
+  const token = user.getSignedToken();
+  const refreshToken = user.getRefreshToken();
+
+  const savedToken = await Token.update(
+    {
+      token: refreshToken,
+      uuid: user.uuid,
+    },
+    {
+      where: { uuid: user.uuid },
+    }
+  );
+
+  if (!savedToken) res.status(500).json("Error accessing database");
+  else {
+    res
+      .status(statusCode)
+      .json({ token, refreshToken, username: user.username });
+  }
+};
+
 const createToken = async (user, statusCode, res) => {
   const token = user.getSignedToken();
   const refreshToken = user.getRefreshToken();
