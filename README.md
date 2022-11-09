@@ -10,7 +10,7 @@ En este hito, como resultado de la planificación del proyecto, se definen las h
 
 Se establece MVC (Modelo-Vista-Controlador) como arquitectura del proyecto, debido las ventajas que ofrece en cuanto a la separación de responsabilidades y modularización entre las diferentes capas, contribuyendo así a un mejor despliegue sobre tecnologías cloud.
 
-Se han definido los siguientes milestones:
+Se han creado los siguientes milestones:
 
 [Milestone 1](https://github.com/rccarmenaty/TravelShare/milestone/5)
 
