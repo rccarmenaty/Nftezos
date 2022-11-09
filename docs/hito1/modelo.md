@@ -6,7 +6,7 @@ Se han identificado tres entidades principales a modelar:
 
 ### user
 
-- id
+- uuid
 - username
 - email
 - password
