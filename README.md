@@ -25,9 +25,9 @@ A continuación se pueden ver las historias de usuarios definidas:
 [HU-2](https://github.com/rccarmenaty/TravelShare/issues/2)  
 [HU-3](https://github.com/rccarmenaty/TravelShare/issues/3)  
 [HU-4](https://github.com/rccarmenaty/TravelShare/issues/4)  
-[HU-5](https://github.com/rccarmenaty/TravelShare/issues/5) .
-[HU-6](https://github.com/rccarmenaty/TravelShare/issues/6) .
-[HU-7](https://github.com/rccarmenaty/TravelShare/issues/7) .
-[HU-8](https://github.com/rccarmenaty/TravelShare/issues/8) .
-[HU-9](https://github.com/rccarmenaty/TravelShare/issues/9) .
-[HU-10](https://github.com/rccarmenaty/TravelShare/issues/10) .
+[HU-5](https://github.com/rccarmenaty/TravelShare/issues/5)  
+[HU-6](https://github.com/rccarmenaty/TravelShare/issues/6)  
+[HU-7](https://github.com/rccarmenaty/TravelShare/issues/7)  
+[HU-8](https://github.com/rccarmenaty/TravelShare/issues/8)  
+[HU-9](https://github.com/rccarmenaty/TravelShare/issues/9)  
+[HU-10](https://github.com/rccarmenaty/TravelShare/issues/10)
