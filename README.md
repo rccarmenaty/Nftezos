@@ -18,7 +18,7 @@ Se definen como tecnologías a utilizar en el proyecto **Node**, **Express**, **
 
 **Express** es el framework web mas popular de Node, proporciona mecanismos para añadir procesamiento de peticiones "middleware" adicional en cualquier punto dentro del ciclo de una petición http así como la escritura de manejadores de peticiones con diferentes verbos HTTP en diferentes rutas URL.
 
-**Sequelize** es una herramienta ORM para Node que cuenta con un sólido soporte de transacciones, relaciones, eager and _lazy loading_ y replicación de lectura.
+**Sequelize** es una herramienta ORM para Node que cuenta con un sólido soporte de transacciones, relaciones, _eager and lazy loading_ y replicación de lectura.
 
 Se han creado los siguientes milestones:
 
