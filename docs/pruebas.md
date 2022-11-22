@@ -21,7 +21,7 @@ En esta orden especificamos que cuando npm ejecute el script `test`, se cambiar�
 
 ### Pruebas
 
-En la carpeta pruebas existe el archivo `user.test.js` en el cual se definen algunas pruebas relacionadas con la creación de nuevos usuarios así como el acceso e identificación en el sistema.
+En la carpeta tests existe el archivo `user.test.js` en el cual se definen algunas pruebas relacionadas con la creación de nuevos usuarios así como el acceso e identificación en el sistema.
 
 Un ejemplo a continuación en el que se trata de registrar un usuario con información incompleta, se realiza la petición al endpoint correspondiente `/api/auth/register` con el campo `name` vacío, y en la respuesta se espera un código de error `400` indicando que el registro no se ha podido realizar, un campo `error` con un mensaje que lee _User info should be complete_.
 
