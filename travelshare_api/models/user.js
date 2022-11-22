@@ -23,20 +23,26 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     getSignedToken = function () {
-      return jwt.sign({ id: this.uuid }, process.env.JWT_SECRET, {
+      return jwt.sign({ id: this.id }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRE,
       });
     };
 
     getRefreshToken = function () {
-      return jwt.sign({ id: this.uuid }, process.env.JWT_REFRESH, {
+      return jwt.sign({ id: this.id }, process.env.JWT_REFRESH, {
         expiresIn: process.env.JWT_REFRESH_TIME,
       });
     };
   }
   User.init(
     {
-      uuid: { type: DataTypes.UUID, defaultValue: DataTypes.UUIDV4 },
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
+      },
+      name: { type: DataTypes.STRING, allowNull: false },
+      lastname: { type: DataTypes.STRING, allowNull: false },
       username: { type: DataTypes.STRING, allowNull: false },
       email: {
         type: DataTypes.STRING,
@@ -57,8 +63,10 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "User",
-      tableName: "users",
+      tableName: "user",
     }
   );
+
+  User.schema("user");
   return User;
 };

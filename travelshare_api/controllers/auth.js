@@ -2,67 +2,98 @@ const { User, Token } = require("../models");
 const ErrorResponse = require("../utils/errorResponse");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { token } = require("morgan");
 
 exports.register = async (req, res, next) => {
-  const { username, email, password } = req.body;
+  const valid = validateUserInfo(req.body);
+
+  if (!valid)
+    return res.status(400).json({ error: "User info should be complete" });
+  const { name, lastname, username, email, password } = req.body;
 
   if (password.length < 6)
-    return next(
-      new ErrorResponse("Contraseña debe tener al menos 6 caracteres", 400)
-    );
+    return res
+      .status(400)
+      .json({ error: "Password should be at least 6 characters" });
+
+  const validEmail = validateEmail(email);
+
+  if (!validEmail)
+    return res.status(400).json({ error: "Email format is not correct" });
 
   try {
     const username_check = await User.findOne({ where: { username } });
 
     if (username_check)
-      return next(new ErrorResponse("Nombre de usuario ya existe", 400));
+      return res.status(409).json({ error: "Username already exists" });
 
     const user_check = await User.findOne({ where: { email } });
 
-    if (user_check) return next(new ErrorResponse("Correo ya existe", 400));
+    if (user_check)
+      return res.status(409).json({ error: "Email already exists" });
 
     const salt = await bcrypt.genSalt(10);
 
     const password_hash = await bcrypt.hash(password, salt);
     const user = await User.create({
+      name,
+      lastname,
       username,
       email,
       password: password_hash,
     });
 
-    createToken(user, 201, res);
+    const { token, refreshToken } = createToken(user);
+
+    const savedToken = await Token.create({
+      token: refreshToken,
+      uuid: user.id,
+    });
+
+    if (!savedToken)
+      res.status(500).json({ error: "Error accessing database" });
+    else res.status(201).json({ token, refreshToken, username: user.username });
   } catch (error) {
-    return next(new Error("Error al crear el usuario"));
+    return res.status(500).json({ error: "Error creating User" });
   }
 };
 exports.login = async (req, res, next) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
-    return next(
-      new ErrorResponse("Especifique nombre de ususario y contraseña", 400)
-    );
+    return res.status(401).json({ error: "Username or password incorrect" });
   }
 
   try {
     const user = await User.findOne({ where: { username } });
 
     if (!user)
-      return next(
-        new ErrorResponse("Nombre de usuario o contraseña incorrectos", 401)
-      );
+      return res.status(401).json({ error: "Username or password incorrect" });
 
     const isMatch = await user.matchPasswords(password);
 
-    if (!isMatch) {
-      return next(
-        new ErrorResponse("Nombre de usuario o contraseña incorrectos", 401)
-      );
-    }
+    if (!isMatch)
+      return res.status(401).json({ error: "Username or password incorrect" });
 
-    sendToken(user, 200, res);
+    const { token, refreshToken } = createToken(user);
+
+    const savedToken = await Token.update(
+      {
+        token: refreshToken,
+        uuid: user.id,
+      },
+      {
+        where: { uuid: user.id },
+      }
+    );
+
+    if (!savedToken)
+      res.status(500).json({ error: "Error accessing database" });
+    else {
+      res.status(200).json({ token, refreshToken, username: user.username });
+    }
   } catch (error) {
-    return next(new ErrorResponse("Error Interno"));
+    return res.status(500).json({ error });
   }
 };
 
@@ -71,7 +102,7 @@ exports.refreshToken = async (req, res, next) => {
   const user = req.user;
 
   try {
-    const token = await Token.findOne({ where: { uuid: user.uuid } });
+    const token = await Token.findOne({ where: { id: user.id } });
 
     if (token.token !== refreshToken)
       return next(new ErrorResponse("Tokens not matching"));
@@ -81,8 +112,7 @@ exports.refreshToken = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH);
-    if (decoded.id !== user.uuid)
-      return next(new ErrorResponse("User unknown"));
+    if (decoded.id !== user.id) return next(new ErrorResponse("User unknown"));
     res.status(304).json("Unmodified");
   } catch (err) {
     if (err.name === "TokenExpiredError") {
@@ -99,10 +129,10 @@ exports.logout = async (req, res, next) => {
   const savedToken = await Token.update(
     {
       token: "",
-      uuid: user.uuid,
+      uuid: user.id,
     },
     {
-      where: { uuid: user.uuid },
+      where: { id: user.id },
     }
   );
 
@@ -129,10 +159,10 @@ const sendToken = async (user, statusCode, res) => {
   const savedToken = await Token.update(
     {
       token: refreshToken,
-      uuid: user.uuid,
+      uuid: user.id,
     },
     {
-      where: { uuid: user.uuid },
+      where: { id: user.id },
     }
   );
 
@@ -144,18 +174,27 @@ const sendToken = async (user, statusCode, res) => {
   }
 };
 
-const createToken = async (user, statusCode, res) => {
+const createToken = (user) => {
   const token = user.getSignedToken();
   const refreshToken = user.getRefreshToken();
 
-  const savedToken = await Token.create({
-    token: refreshToken,
-    uuid: user.uuid,
-  });
+  return { token, refreshToken };
+};
 
-  if (!savedToken) res.status(500).json("Error accessing database");
-  else
-    res
-      .status(statusCode)
-      .json({ token, refreshToken, username: user.username });
+const validateUserInfo = (body) => {
+  keys = ["name", "lastname", "username", "email", "password"];
+
+  for (k in keys) {
+    if (body[keys[k]] == null) return false;
+    if (body[keys[k]].length == 0) return false;
+  }
+  return true;
+};
+
+const validateEmail = (email) => {
+  return String(email)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
 };
