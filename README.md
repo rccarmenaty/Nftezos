@@ -18,5 +18,3 @@ Se ha incluido en esta etapa, para facilitar la realización de pruebas y no int
 Las pruebas a escribir estarán situadas en una carpeta llamada test en la raíz del proyecto, y cada archivo que contega pruebas deberá terminar con la extensión `test.js`, como lo indica la metodología de trabajo del framework.
 
 [Aquí](./docs/pruebas.md) se puede ver de manera mas detallada el procedimiento de instalación y configuración del entorno de pruebas, así como algunas pruebas realizadas.
-
-Para ejecutar las pruebas se ejecutará la orden `npm test`

@@ -63,4 +63,6 @@ it("Should register a new User with all valid fields", async () => {
 ```
 
 Debajo podemos ver el resultado de todas las pruebas realizadas hasta el momento, referentes al acceso de usuario.
+Para ejecutar las pruebas se ejecutará la orden `npm test`.
+
 ![Tests](./img/tests.png)
