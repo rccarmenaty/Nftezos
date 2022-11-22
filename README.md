@@ -22,12 +22,12 @@ Se definen como tecnologías a utilizar en el proyecto **Node**, **Express**, **
 
 Se han creado los siguientes milestones:
 
-[Milestone 1](https://github.com/rccarmenaty/TravelShare/milestone/4)
+[Milestone 1 - _Identificación de usuario_](https://github.com/rccarmenaty/TravelShare/milestone/4)
 
 - Definiendo el [modelo](https://github.com/rccarmenaty/TravelShare/blob/hito1/docs/hito1/modelo.md)
 
-[Milestone 2 - _Identificación de usuario_](https://github.com/rccarmenaty/TravelShare/milestone/2)  
-[Milestone 3 - _Gestión de grupos_](https://github.com/rccarmenaty/TravelShare/milestone/3)  
+[Milestone 2 - _Gestión de grupos_](https://github.com/rccarmenaty/TravelShare/milestone/2)  
+[Milestone 3 - _Registro de gastos y deudas_](https://github.com/rccarmenaty/TravelShare/milestone/3)  
 [Milestone 4 - _Balance de saldo y deudas_](https://github.com/rccarmenaty/TravelShare/milestone/6)
 
 A continuación se pueden ver las historias de usuarios definidas:
