@@ -10,6 +10,14 @@ En este hito, como resultado de la planificación del proyecto, se definen las h
 
 Se establece MVC (Modelo-Vista-Controlador) como arquitectura del proyecto, debido las ventajas que ofrece en cuanto a la separación de responsabilidades y modularización entre las diferentes capas, contribuyendo así a un mejor despliegue sobre tecnologías cloud.
 
+Se definen como tecnologías a utilizar en el proyecto NodeJs, Express y Postgres, que en su conjunto han ganado reconocimiento durante los últimos años como un stack potente y confiable.
+
+Postgres específicamente presenta reglas estrictas para la integridad de datos que garantizan su validez, a diferencia de MogoDB, otra base de datos ampliamente usada en la actualidad, Postgres usa sintaxis y formato SQL, y almacena los datos en forma tabular en filas y columnas, esto permite realizar consultas más complejas, por su naturaleza Postgres también permite escalar mas fácilmente que bases de datos NoSql.
+
+Node.js utiliza un modelo de entrada y salida sin bloqueo controlado por eventos que lo hace ligero y eficiente. Esto le permite manejar una gran cantidad de conexiones simultáneas con un alto nivel de rendimiento.
+
+Express es el framework web mas popular de Node, proporciona mecanismos para añadir procesamiento de peticiones "middleware" adicional en cualquier punto dentro del ciclo de una petición http así como la escritura de manejadores de peticiones con diferentes verbos HTTP en diferentes rutas URL.
+
 Se han creado los siguientes milestones:
 
 [Milestone 1](https://github.com/rccarmenaty/TravelShare/milestone/5)
