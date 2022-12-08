@@ -29,7 +29,7 @@ Con la secuencia anterior el contenedor de la aplicación está listo, pero para
 
 ### Orquestando la infraestructura
 
-Se define el archivo docker-compose.yaml de la siguiente manera:
+Se define el archivo `docker-compose.yaml` de la siguiente manera:
 
 ```javascript
 version: "3.8"
