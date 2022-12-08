@@ -1,6 +1,6 @@
-FROM node:16
+FROM node:16.14.1
 
-WORKDIR /app
+WORKDIR /app/test
 
 COPY package*.json ./
 
@@ -8,6 +8,4 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 3000
-
-CMD [ "npm", "test" ]
+ENTRYPOINT [ "npm", "run", "test" ]
