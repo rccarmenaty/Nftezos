@@ -4,6 +4,8 @@
 
 La aplicación está compuesta por un runtime de NodeJs, sobre el cual se ejecutan varios servicios conformando la api que es la funcionalidad principal. Teniendo esto en cuenta, se define un `Dockerfile` en el cual se especifican las instrucciones para crear el contenedor de la aplicación.
 A continuación una breve descripsión de las órdenes utilizadas:  
+\
+\
 `FROM`: Se parte de una imagen de Node versión 16.14.1, última versión LTS disponible  
 `WORKDIR`: luego se establece el directorio de trabajo, que será donde vivirá la aplicación  
 `COPY`: se copia el archivo package.json en el cual están definidas todas las dependencias  
@@ -71,7 +73,6 @@ En el archivo `docker-compose` se definen los servicios que serán desplegados, 
 `ports`: relación entre puertos del anfitrión y puertos expuestos por éste  
 `volumes`: persistencia de los datos utilizados por el contenedor  
 `depends_on`: se especifica que el contenedor depende de otro servicio
-\
 
 Con la configuración lista, se puede proceder a ejecutar la orden `docker-compose up` para ejecutar los servicios anteriormente mencionados y se obtiene la siguiente respuesta:  
 \
