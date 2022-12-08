@@ -5,7 +5,6 @@
 La aplicación está compuesta por un runtime de NodeJs, sobre el cual se ejecutan varios servicios conformando la api que es la funcionalidad principal. Teniendo esto en cuenta, se define un `Dockerfile` en el cual se especifican las instrucciones para crear el contenedor de la aplicación.
 A continuación una breve descripsión de las órdenes utilizadas:  
 \
-\
 `FROM`: Se parte de una imagen de Node versión 16.14.1, última versión LTS disponible  
 `WORKDIR`: luego se establece el directorio de trabajo, que será donde vivirá la aplicación  
 `COPY`: se copia el archivo package.json en el cual están definidas todas las dependencias  
