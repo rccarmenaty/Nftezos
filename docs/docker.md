@@ -57,7 +57,6 @@ services:
 ```
 
 En el archivo `docker-compose` se definen los servicios que serán desplegados, dentro del tag **services**, en el cual se han definido tres servicios principales, cada uno corresponde a un contenedor diferente. Se han nombrado **db_test** y **rest**, para la base de datos de prueba y la api respectivamente.
-\
 
 ### Descripción del servicio de base de datos:
 
