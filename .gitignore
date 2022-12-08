@@ -106,3 +106,6 @@ dist
 
 # Rest api tool
 rest.http
+
+# Folder created by Postgres database engine
+pgdata
