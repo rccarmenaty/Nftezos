@@ -31,7 +31,7 @@ Con la secuencia anterior el contenedor de la aplicación está listo, pero para
 
 Se define el archivo docker-compose.yaml de la siguiente manera:
 
-```json
+```javascript
 version: "3.8"
 services:
   db_test:
