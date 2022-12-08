@@ -54,7 +54,7 @@ exports.register = async (req, res, next) => {
       res.status(500).json({ error: "Error accessing database" });
     else res.status(201).json({ token, refreshToken, username: user.username });
   } catch (error) {
-    return res.status(500).json({ error: "Error creating User" });
+    return res.status(500).json(error);
   }
 };
 exports.login = async (req, res, next) => {
