@@ -1,8 +1,10 @@
 name: ci
 
 on:
-  issues:
-    types: [closed]
+  push:
+    branches:
+      - "hito3"
+
 jobs:
   build:
     runs-on: ubuntu-latest
