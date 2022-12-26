@@ -3,7 +3,7 @@
 ### Empaquetado de la aplicación
 
 La aplicación utiliza la distribución Alpine como base, sobre la cual se ejecutan varios servicios como Node y Postgres. Teniendo esto en cuenta, se define un `Dockerfile` en el cual se especifican las instrucciones para crear el contenedor de la aplicación. Se ha creado para la ejecución del contenedor, un script auxiliar en el que se ejecutan tareas de configuración de la base de datos, referenciado por `script.sh`.
-A continuación una breve descripción de las órdenes utilizadas:
+A continuación una breve descripción de las instrucciones utilizadas:
 
 ```
 
@@ -50,7 +50,7 @@ ENTRYPOINT [ "npm", "run", "test" ]
 
 - Se define la variable de entorno PGDATA, donde se especifica el directorio que se utilizará como localización de archivos de datos y configuración del gestor de base de datos Postgres.
 
-- Se ejecuta la orden de instalar Node y NPM como gestor de paquetes de la plataforma.
+- Se ejecuta la orden de instalar Node y NPM como gestor de paquetes.
 
 - APK update corresponde a la orden de actualizar los paquetes en la distro Alpine.
 
