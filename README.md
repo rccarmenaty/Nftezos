@@ -10,6 +10,6 @@ En este hito se crea un entorno de pruebas utilizando contenedores, especificame
 
 Para utilizar Docker en la plataforma Macos ARM64, se puede descargar el instalador existente para dicha arquitectura desde la pagina oficial, [aquí](https://docs.docker.com/desktop/install/mac-install/)
 
-Para realizar la tareas corespondientes al hito, se han definido dos archivos principales, un `Dockerfile` y un `docker-compose` archivos en los cuáles quedan recogidas las instrucciones para crear el contenedor de la apliacación y las especificaciones del stack necesario para el funcionamiento de las pruebas respectivamente.
+Para realizar la tareas corespondientes al hito, se han definido el fichero `Dockerfile` en el cuál quedan recogidas las instrucciones para crear el contenedor de la aplicación y las especificaciones del stack necesario para el funcionamiento de las pruebas.
 
 [Aquí](./docs/docker.md) se pueden ver en detalle los procedimientos realizados.

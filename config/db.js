@@ -2,7 +2,7 @@ const { sequelize } = require("../models");
 
 const connectDB = async () => {
   try {
-    await sequelize.sync({ force: false, logging: false });
+    await sequelize.sync({ logging: false });
     // console.log("Successfully authenticated");
   } catch (error) {
     console.log("Error connecting DB" + error);

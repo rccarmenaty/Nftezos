@@ -2,80 +2,116 @@
 
 ### Empaquetado de la aplicación
 
-La aplicación está compuesta por un runtime de NodeJs, sobre el cual se ejecutan varios servicios conformando la api que es la funcionalidad principal. Teniendo esto en cuenta, se define un `Dockerfile` en el cual se especifican las instrucciones para crear el contenedor de la aplicación.
-A continuación una breve descripsión de las órdenes utilizadas:  
-\
-`FROM`: Se parte de una imagen de Node versión 16.14.1, última versión LTS disponible  
-`WORKDIR`: luego se establece el directorio de trabajo, que será donde vivirá la aplicación  
-`COPY`: se copia el archivo package.json en el cual están definidas todas las dependencias  
-`RUN`: se utiliza para ejecutar una orden, en este caso instalar dependencias  
-`COPY`: copia los archivos al contendor  
-`ENTRYPOINT`: especifica el ejecutable que usará el contenedor, en este caso realizar las pruebas
+La aplicación utiliza la distribución Alpine como base, sobre la cual se ejecutan varios servicios como Node y Postgres. Teniendo esto en cuenta, se define un `Dockerfile` en el cual se especifican las instrucciones para crear el contenedor de la aplicación. Se ha creado para la ejecución del contenedor, un script auxiliar en el que se ejecutan tareas de configuración de la base de datos, referenciado por `script.sh`.
+A continuación una breve descripción de las órdenes utilizadas:
 
 ```
-FROM node:16.14.1
 
-WORKDIR /app
+FROM alpine:3.16
 
-COPY package*.json ./
+ENV PGDATA="/var/lib/postgresql/data"
 
-RUN npm install
+RUN apk add nodejs npm
+
+RUN apk update
+
+RUN apk add postgresql
+
+RUN (addgroup -S postgres && adduser -S postgres -G postgres || true)
+
+RUN mkdir -p /var/lib/postgresql/data
+
+RUN mkdir -p /run/postgresql/
+
+RUN chown -R postgres:postgres /run/postgresql/
+
+RUN chown -R postgres:postgres - /var/lib/postgresql/data
+
+RUN chmod -R 0700 /var/lib/postgresql/data
+
+COPY script.sh .
+
+RUN chmod +x script.sh
+
+USER postgres:postgres
+
+RUN initdb
+
+RUN ./script.sh
+
+WORKDIR /app/test
 
 COPY . .
 
-ENTRYPOINT[ "npm", "run", "test" ]
+ENTRYPOINT [ "npm", "run", "test" ]
 ```
 
-Con la secuencia anterior el contenedor de la aplicación está listo, pero para que las pruebas se puedan realizar correctamente, se necesita de otro servicio como es la base de datos, en este caso se utiliza PostgresSql. Para orquestar una estructura que permita desplegar la aplicación además de un servicio de base de datos, se utiliza la herramienta `docker-compose`, en la cual se definen los servicios que son necesarios, así como la manera en la que estos pueden interactuar.
+- Se parte de la imagen de la distribución Alpine versión 3.16.
 
-### Orquestando la infraestructura
+- Se define la variable de entorno PGDATA, donde se especifica el directorio que se utilizará como localización de archivos de datos y configuración del gestor de base de datos Postgres.
 
-Se define el archivo `docker-compose.yaml` de la siguiente manera:
+- Se ejecuta la orden de instalar Node y NPM como gestor de paquetes de la plataforma.
 
-```javascript
-version: "3.8"
-services:
-  db_test:
-    image: postgres
-    environment:
-      DATABASE_HOST: 127.0.0.1
-      POSTGRES_PASSWORD: travelshare
-      POSTGRES_USER: postgres
-      POSTGRES_DB: test
-    volumes:
-      - /var/lib/postgresql/data_test
-    ports:
-      - "5431:5432"
-  rest:
-    build: ./travelshare_api
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./travelshare_api:/app
-      - /app/node_modules
-    depends_on:
-      - db_test
+- APK update corresponde a la orden de actualizar los paquetes en la distro Alpine.
+
+- Se ejecuta la orden de instalar el gestor de base de datos Postgres.
+
+- Se ejecuta la orden de crear grupo y usuario `postgres` para posteriormente ser utilizado en tareas de configuración de la base de datos.
+
+- Se crea el directorio donde recidirán los archivos de datos y configuración del gestor de base de datos Postgres.
+
+- Se crea el directorio donde generalmente reciden archivos de ejecución relacionados con el lanzamiento del proceso del gestor de base de datos.
+
+- Se modifica el usuario y grupo al que pertenece el directorio anteriormente creado, y se asigna al usuario y grupo postgres.
+
+- Se modifica el usuario y grupo al que pertenece el directorio, y se asigna al usuario y grupo postgres.
+
+- Se modifican los permisos sobre el directorio del gestor de base datos, dando acceso solo al owner a ejecución, lectura y escritura.
+
+- Se copia el script de configuración de algunos parámetros de la base de datos.
+
+- Se asignan permisos de ejecución sobre el script.
+
+- Se cambia al usuario `postgres`.
+
+- Se ejecuta la orden de iniciar un nuevo cluster de base de datos.
+
+- Se ejecuta el script.
+
+- Se define el directorio de trabajo como se especifica en el guion de la práctica.
+
+- Se copian los archivos al contenedor
+
+- Se define como entry point la orden `npm run test` para que se ejecuten las pruebas.
+
+En el script definido las tareas que se realizan son las siguientes:
+
+- Iniciar el servicio de base de datos.
+
+- Definir un password para el usuario postgres.
+
+- Crear la base de datos `travelshare`
+
+- Detener el servicio.
+
+```
+#!/bin/sh
+
+pg_ctl start
+psql -c "ALTER USER postgres WITH ENCRYPTED PASSWORD 'postgres';"
+psql -c "CREATE DATABASE travelshare;"
+pg_ctl stop
+
 ```
 
-En el archivo `docker-compose` se definen los servicios que serán desplegados, dentro del tag **services**, en el cual se han definido tres servicios principales, cada uno corresponde a un contenedor diferente. Se han nombrado **db_test** y **rest**, para la base de datos de prueba y la api respectivamente.
+Con la configuración lista, se puede proceder a ejecutar la orden `docker build . -t travelshare --no-cache`, para crear el contenedor con lo necesario para que se ejecuten las pruebas designadas:
 
-### Descripción del servicio de base de datos:
-
-`image`: se define la imagen que se va a utilizar, en este caso **postgres**  
-`environment`: variables de entorno a utilizar por el contenedor  
-`volumes`: persistencia de los datos utilizados por el contenedor  
-`ports`: relación entre puertos del anfitrión y puertos expuestos por éste
-
-### Descripción del servicio rest api:
-
-`build`: se indica una carpeta en la cual existe un `Dockerfile` y se toma este como referencia para construir el contenedor  
-`ports`: relación entre puertos del anfitrión y puertos expuestos por éste  
-`volumes`: persistencia de los datos utilizados por el contenedor  
-`depends_on`: se especifica que el contenedor depende de otro servicio
-
-Con la configuración lista, se puede proceder a ejecutar la orden `docker-compose up` para ejecutar los servicios anteriormente mencionados y se obtiene la siguiente respuesta:  
 \
-![Tests](./img/docker_test.png)
+ ![Build](./img/docker_build.png)
+
+Se procede a realizar la pruebas ejecutando el contenedor mediante la orden `docker run -t -v `pwd`:/app/test travelshare`, como se indica en el guion de la práctica, obteniendose el siguiente resultado:
+
 \
-\
+ ![Build](./img/tests.png)
+
 En la imagen anterior se puede apreciar que se han realizado las pruebas correspondientes en el contenedor que se ha creado para ello.
