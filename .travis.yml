@@ -17,9 +17,6 @@ before_script:
   - psql --command="CREATE DATABASE travelshare;"
 install:
   - npm install
-cache:
-  directories:
-    - "node_modules"
 jobs:
   include:
     - stage: test
