@@ -14,7 +14,7 @@ env:
     - PGPORT=5433
 before_script:
   - psql -c "ALTER USER postgres WITH ENCRYPTED PASSWORD 'travis';"
-  - psql -c 'create database travis;'
+  - psql -c 'create database travelshare;'
 install:
   - npm install --force
 jobs:
