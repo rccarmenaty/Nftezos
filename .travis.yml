@@ -12,6 +12,7 @@ addons:
 env:
   global:
     - PGPORT=5433
+    - NODE_ENV=travis
 before_script:
   - psql -c "ALTER USER postgres WITH ENCRYPTED PASSWORD 'travis';"
   - psql -c 'create database travelshare;'
