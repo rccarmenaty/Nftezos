@@ -18,9 +18,13 @@ env:
     - PGDATA="/var/lib/postgresql/data"
 
 before_script:
+  - addgroup -S postgres && adduser -S postgres -G postgres || true
+  - chown -R postgres:postgres /run/postgresql/
   - sudo mkdir -p /var/lib/postgresql/data
-  - sudo initdb
-  - sudo pg_ctl start
+  - chown -R postgres:postgres /var/lib/postgresql/data
+  - su postgres
+  - initdb
+  - pg_ctl start
   - psql --command="CREATE DATABASE travelshare;"
 install:
   - npm install
