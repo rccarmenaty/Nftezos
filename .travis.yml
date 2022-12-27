@@ -23,12 +23,11 @@ before_script:
   - sudo chown -R postgres:postgres /var/lib/postgresql/data
 install:
   - npm install
-script:
-  - initdb
-  - pg_ctl start
-  - psql -c 'create database travelshare;' -U postgres
 jobs:
   include:
     - stage: test
       script:
+        - initdb
+        - pg_ctl start
+        - psql -c 'create database travelshare;' -U postgres
         - npm run test
