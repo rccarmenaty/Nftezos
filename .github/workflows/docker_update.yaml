@@ -3,7 +3,7 @@ name: ci
 on:
   push:
     branches:
-      - "main"
+      - "hito3"
 
 jobs:
   docker:
