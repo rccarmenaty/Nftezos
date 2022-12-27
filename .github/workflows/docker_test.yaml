@@ -3,44 +3,22 @@ name: tests
 on: push
 
 jobs:
-  # Label of the runner job
   runner-job:
-    # You must use a Linux environment when using service containers or container jobs
     runs-on: ubuntu-latest
-
-    # Service containers to run with `runner-job`
     services:
-      # Label used to access the service container
       postgres:
-        # Docker Hub image
         image: postgres
-        # Provide the password for postgres
         env:
           POSTGRES_PASSWORD: postgres
           DATABASE_HOST: 127.0.0.1
           POSTGRES_USER: postgres
           POSTGRES_DB: travelshare
-        # Set health checks to wait until postgres has started
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
     steps:
-
       - name: Check out repository code
         uses: actions/checkout@v3
-
-      # Performs a clean installation of all dependencies in the `package.json` file
-      # For more information, see https://docs.npmjs.com/cli/ci.html
       - name: Install dependencies
         run: npm ci
-
       - name: Connect to PostgreSQL
-        # Runs a script that creates a PostgreSQL table, populates
-        # the table with data, and then retrieves the data.
-        run: /bin/bash script.sh
-      
+        run: /bin/bash script.sh  
       -name : Test
         run: npm run test
