@@ -7,4 +7,4 @@ Repositorio para práctica y proyecto de la asignatura "Cloud Computing" del Mas
 ### Integración continua
 
 En este hito se realizan la configuración necesaria para llevar a cabo la integración continua. Para ello se ha utilizado Travis y Github Actions.
-Para mas detalle
+Ver mas detalles [aquí](./docs/ci.md).
