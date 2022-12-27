@@ -16,7 +16,7 @@ before_script:
   - psql -c "ALTER USER postgres WITH ENCRYPTED PASSWORD 'postgres';"
   - psql -c 'create database travelshare;'
 install:
-  - npm ci
+  - npm install --force
 jobs:
   include:
     - stage: test
