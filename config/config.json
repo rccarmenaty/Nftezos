@@ -16,8 +16,8 @@
   },
   "travis": {
     "username": "postgres",
-    "password": "postgres",
-    "database": "travelshare",
+    "password": "travis",
+    "database": "travis",
     "host": "localhost",
     "port": 5433,
     "dialect": "postgres"
