@@ -19,7 +19,7 @@ env:
 
 before_script:
   # - addgroup -S postgres && adduser -S postgres -G postgres || true
-  - sudo mkdir -p /var/lib/postgresql/data
+  # - sudo mkdir -p /var/lib/postgresql/data
   - psql -c 'create database travelshare;'
   # - sudo chown -R postgres:postgres /var/lib/postgresql/data
 install:
