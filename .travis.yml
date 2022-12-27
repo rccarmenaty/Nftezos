@@ -18,6 +18,11 @@ env:
     - PGDATA="/var/lib/postgresql/data"
 
 before_script:
+  - sudo sed -i -e '/local.*peer/s/postgres/all/' -e 's/peer\|md5/trust/g' /etc/postgresql/*/main/pg_hba.conf
+  - sudo service postgresql restart
+  - sleep 1
+  - postgres --version
+script:
   - psql -c 'create database travelshare;' -U postgres
 install:
   - npm install
