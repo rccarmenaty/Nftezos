@@ -16,6 +16,7 @@ env:
     - DB_USER=postgres
     - DB_PASSWORD=postgres
 before_script:
+  - pg_ctl start
   - psql --command="CREATE DATABASE travelshare;"
 install:
   - npm install
