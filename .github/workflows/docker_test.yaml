@@ -42,4 +42,5 @@ jobs:
         # the table with data, and then retrieves the data.
         run: /bin/bash script.sh
         # Environment variables used by the `client.js` script to create a new PostgreSQL table.
+      - name: Perform tests
         run: npm run test
