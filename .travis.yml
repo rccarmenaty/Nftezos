@@ -19,9 +19,6 @@ env:
 
 before_script:
   - sudo mkdir -p /var/lib/postgresql/data
-  - sudo chown -R postgres:postgres /var/lib/postgresql/data
-  - sudo chmod -R 777 /var/lib/postgresql/data
-  - USER=postgres
   - initdb
   - pg_ctl start
   - psql --command="CREATE DATABASE travelshare;"
