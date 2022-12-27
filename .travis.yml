@@ -21,7 +21,7 @@ before_script:
   - sudo mkdir -p /var/lib/postgresql/data
   - sudo chown -R postgres:postgres /var/lib/postgresql/data
   - sudo chmod -R 777 /var/lib/postgresql/data
-  - /etc/init.d/postgresql start
+  - pg_ctl start
   - psql --command="CREATE DATABASE travelshare;"
 install:
   - npm install
