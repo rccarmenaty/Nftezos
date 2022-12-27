@@ -12,21 +12,13 @@ addons:
 env:
   global:
     - PGPORT=5433
-    - DB_USER=postgres
-
 before_script:
-  # - addgroup -S postgres && adduser -S postgres -G postgres || true
-  # - sudo mkdir -p /var/lib/postgresql/data
   - psql -c "ALTER USER postgres WITH ENCRYPTED PASSWORD 'postgres';"
   - psql -c 'create database travelshare;'
-  # - sudo chown -R postgres:postgres /var/lib/postgresql/data
 install:
   - npm install
 jobs:
   include:
     - stage: test
       script:
-        # - initdb
-        # - pg_ctl start
-        # - psql -c 'create database travelshare;'
         - npm run test
