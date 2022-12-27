@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "postgres",
-    "password": "postgres",
+    "password": "",
     "database": "travelshare",
     "host": "localhost",
     "port": 5433,
@@ -10,7 +10,7 @@
   },
   "test": {
     "username": "postgres",
-    "password": "postgres",
+    "password": "",
     "database": "travelshare",
     "port": 5433,
     "host": "localhost",
