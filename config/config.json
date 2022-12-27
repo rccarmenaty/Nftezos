@@ -4,6 +4,7 @@
     "password": "postgres",
     "database": "travelshare",
     "host": "localhost",
+    "port": 5433,
     "dialect": "postgres",
     "logging": false
   },
@@ -11,6 +12,7 @@
     "username": "postgres",
     "password": "postgres",
     "database": "travelshare",
+    "port": 5433,
     "host": "localhost",
     "dialect": "postgres"
   },
