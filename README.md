@@ -6,7 +6,7 @@ Repositorio para práctica y proyecto de la asignatura "Cloud Computing" del Mas
 
 ## Hito 0
 
-Documentación inicial sobre el proyecto a desarrollar, [descripción del problema](docs/hito0/descripcion_problema.md) y [configuración inicial de Git y Github](docs/hito0/configuracion_inicial.md), ver más [aquí](https://github.com/rccarmenaty/TravelShare/tree/hito0).
+Documentación inicial sobre el proyecto a desarrollar, descripción del problema y configuración inicial de Git y Github, ver más [aquí](https://github.com/rccarmenaty/TravelShare/tree/hito0).
 
 ---
 
