@@ -39,7 +39,7 @@ jobs:
       - name: Install postgres client
         run: |
           apt-get update
-          apt-get install --yes postgresql-client
+          apt-get install --force-yes postgresql-client
       - name: Change password for postgres
         run: psql -c "ALTER USER postgres WITH ENCRYPTED PASSWORD 'postgres';"
       - name: Create Database
