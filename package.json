@@ -6,7 +6,7 @@
     "start": "npx nodemon index.js",
     "migrate": "npx sequelize-cli db:migrate",
     "migrate:reset": "npx sequelize-cli db:migrate:undo:all && npm run migrate",
-    "test": "cross-env NODE_ENV=test && npm run migrate && jest",
+    "test": "cross-env NODE_ENV=test && npm run test_dev",
     "test_dev": "npm run migrate && jest",
     "deletetdevdb": "npx sequelize-cli db:drop",
     "createdevdb": "npx sequelize-cli db:create",
