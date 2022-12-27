@@ -3,7 +3,7 @@
     "username": "postgres",
     "password": "postgres",
     "database": "travelshare",
-    "host": "localhost",
+    "host": "localhost:5432",
     "dialect": "postgres",
     "logging": false
   },
@@ -11,8 +11,7 @@
     "username": "postgres",
     "password": "postgres",
     "database": "travelshare",
-    "host": "localhost",
-    "port": 5433,
+    "host": "localhost:5433",
     "dialect": "postgres"
   },
   "production": {
