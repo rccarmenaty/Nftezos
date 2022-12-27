@@ -19,6 +19,7 @@ env:
 
 before_script:
   - sudo mkdir -p /var/lib/postgresql/data
+  - initdb
   - pg_ctl start
   - psql --command="CREATE DATABASE travelshare;"
 install:
