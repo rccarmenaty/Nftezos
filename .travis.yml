@@ -11,6 +11,7 @@ addons:
       - postgresql-client-12
 env:
   global:
+    - PGPASSWORD=''
     - DB_NAME=travelsare
     - DB_USER=postgres
     - DB_PASSWORD=postgres
