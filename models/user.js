@@ -2,6 +2,7 @@
 const { Model } = require("sequelize");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+Group = require("./group");
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -12,6 +13,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.hasMany(Group);
+      this.belongsTo(Group, { through: "group_user" });
     }
 
     toJSON() {
