@@ -2,7 +2,6 @@
 const { Model } = require("sequelize");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-Group = require("./group");
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -13,12 +12,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.hasMany(Group);
-      this.belongsTo(Group, { through: "group_user" });
+
+      this.belongsToMany(models.Group, { through: "group_user" });
     }
 
     toJSON() {
-      return { ...this.get(), id: undefined };
+      return { ...this.get(), uuid: undefined };
     }
 
     matchPasswords = async function (password) {
@@ -26,23 +25,22 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     getSignedToken = function () {
-      return jwt.sign({ id: this.id }, process.env.JWT_SECRET, {
+      return jwt.sign({ id: this.uuid }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRE,
       });
     };
 
     getRefreshToken = function () {
-      return jwt.sign({ id: this.id }, process.env.JWT_REFRESH, {
+      return jwt.sign({ id: this.uuid }, process.env.JWT_REFRESH, {
         expiresIn: process.env.JWT_REFRESH_TIME,
       });
     };
   }
   User.init(
     {
-      id: {
+      uuid: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
-        primaryKey: true,
       },
       name: { type: DataTypes.STRING, allowNull: false },
       lastname: { type: DataTypes.STRING, allowNull: false },

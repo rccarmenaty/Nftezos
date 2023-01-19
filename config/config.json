@@ -11,7 +11,8 @@
     "username": "postgres",
     "password": "postgres",
     "database": "travelshare",
-    "host": "localhost",
+    "logging": false,
+    "host": "db_test",
     "dialect": "postgres"
   },
   "travis": {

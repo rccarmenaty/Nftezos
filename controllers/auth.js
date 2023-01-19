@@ -2,7 +2,7 @@ const { User, Token } = require("../models");
 const ErrorResponse = require("../utils/errorResponse");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { token } = require("morgan");
+const uuid = require("uuid");
 
 exports.register = async (req, res, next) => {
   const valid = validateUserInfo(req.body);
@@ -36,6 +36,7 @@ exports.register = async (req, res, next) => {
 
     const password_hash = await bcrypt.hash(password, salt);
     const user = await User.create({
+      uuid: uuid.v4(),
       name,
       lastname,
       username,
@@ -47,7 +48,7 @@ exports.register = async (req, res, next) => {
 
     const savedToken = await Token.create({
       token: refreshToken,
-      uuid: user.id,
+      uuid: user.uuid,
     });
 
     if (!savedToken)
@@ -80,10 +81,10 @@ exports.login = async (req, res, next) => {
     const savedToken = await Token.update(
       {
         token: refreshToken,
-        uuid: user.id,
+        uuid: user.uuid,
       },
       {
-        where: { uuid: user.id },
+        where: { uuid: user.uuid },
       }
     );
 
@@ -102,7 +103,7 @@ exports.refreshToken = async (req, res, next) => {
   const user = req.user;
 
   try {
-    const token = await Token.findOne({ where: { id: user.id } });
+    const token = await Token.findOne({ where: { id: user.uuid } });
 
     if (token.token !== refreshToken)
       return next(new ErrorResponse("Tokens not matching"));
@@ -112,7 +113,8 @@ exports.refreshToken = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH);
-    if (decoded.id !== user.id) return next(new ErrorResponse("User unknown"));
+    if (decoded.id !== user.uuid)
+      return next(new ErrorResponse("User unknown"));
     res.status(304).json("Unmodified");
   } catch (err) {
     if (err.name === "TokenExpiredError") {
@@ -129,10 +131,10 @@ exports.logout = async (req, res, next) => {
   const savedToken = await Token.update(
     {
       token: "",
-      uuid: user.id,
+      uuid: user.uuid,
     },
     {
-      where: { id: user.id },
+      where: { id: user.uuid },
     }
   );
 
@@ -159,10 +161,10 @@ const sendToken = async (user, statusCode, res) => {
   const savedToken = await Token.update(
     {
       token: refreshToken,
-      uuid: user.id,
+      uuid: user.uuid,
     },
     {
-      where: { id: user.id },
+      where: { id: user.uuid },
     }
   );
 

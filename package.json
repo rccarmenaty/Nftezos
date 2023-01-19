@@ -5,9 +5,9 @@
   "scripts": {
     "start": "npx nodemon index.js",
     "migrate": "npx sequelize-cli db:migrate",
-    "migrate:reset": "npx sequelize-cli db:migrate:undo:all && npm run migrate",
-    "test": "cross-env NODE_ENV=test npx sequelize-cli db:migrate && jest",
-    "docker_test": "pg_ctl start && cross-env NODE_ENV=test npx sequelize-cli db:migrate && jest",
+    "reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npm run migrate",
+    "test": "cross-env NODE_ENV=test npm run reset && jest -i --detectOpenHandles",
+    "docker_test": "pg_ctl start && cross-env NODE_ENV=test npx sequelize-cli db:migrate && jest--detectOpenHandles",
     "travis": "cross-env NODE_ENV=travis npx sequelize-cli db:migrate && jest",
     "deletetdevdb": "npx sequelize-cli db:drop",
     "createdevdb": "npx sequelize-cli db:create",

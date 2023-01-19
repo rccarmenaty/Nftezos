@@ -18,9 +18,13 @@ exports.protect = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findOne({ where: { id: decoded.id } });
 
-    if (!user) return next(new ErrorResponse("User not found", 404));
+    const user = await User.findOne({ where: { uuid: decoded.id } });
+
+    if (!user)
+      return next(
+        new ErrorResponse("Not authorized to access this route", 403)
+      );
 
     req.user = user;
 
