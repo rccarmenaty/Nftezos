@@ -45,3 +45,9 @@ Para mas detalle ver [aquí](https://github.com/rccarmenaty/TravelShare/tree/hit
 
 En este hito se desarrolla y amplían las funcinalidades de la API REST correspondiente a la aplicación, utilizando NodeJS y ExpressJS para el desarrollo de la api, y Jest y Supertest para la realización de las pruebas.
 Para mas detalle ver [aquí](https://github.com/rccarmenaty/TravelShare/tree/hito5).
+
+## Hito 6
+
+### Composicion de Servicios
+
+En este hito se logra estructurar la arquitectura de la aplicación utilizando contenedores Docker. También se incluye la gestión de logs utilizando un la biblioteca Pino para ExpressJS. Para mas detalle ver [aquí](https://github.com/rccarmenaty/TravelShare/tree/hito6)
