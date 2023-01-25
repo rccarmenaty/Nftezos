@@ -4,7 +4,4 @@ Repositorio para práctica y proyecto de la asignatura "Cloud Computing" del Mas
 
 ## Hito 5
 
-### Diseño y Test de un microservicio
-
-En este hito se realizan la configuración necesaria para llevar a cabo la integración continua. Para ello se ha utilizado Travis y Github Actions.
-Ver mas detalles [aquí](./docs/ci.md).
+### Diseño y Test de un Microservicio
