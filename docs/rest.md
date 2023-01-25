@@ -1,6 +1,6 @@
 # Creación de la api REST
 
-Basándome en la descripción del proyecto y en las historias de usuarios definidas, se ha construido una api REST que permite hasta el momento la gestión de usuarios y la gestión de grupos. Cada endpoint excepto los de autenticación están protegidos por `token-authorization` por lo que cada petición realizada al servicio REST debe estar firmada con el token recibido al momento de la autenticación siguiendo un prtron `"Bearer token"`. Como ha sido mecionado en la descripción del Hito 3 para el desarrollo de las pruebas del servicio REST se han utilizado las bibliotecas Jest y Supertest conjuntamente, la última específicamente para probar las peticiones http a los diferentes recursos expuestos.
+Basándome en la descripción del proyecto y en las historias de usuarios definidas, se ha construido una api REST que permite hasta el momento la gestión de usuarios y la gestión de grupos. Cada endpoint excepto los de autenticación están protegidos por `token-authorization` por lo que cada petición realizada al servicio REST debe estar firmada con el token recibido al momento de la autenticación siguiendo un patrón `"Bearer token"`. Como ha sido mecionado en la descripción del Hito 3 para el desarrollo de las pruebas del servicio REST se han utilizado las bibliotecas Jest y Supertest conjuntamente, la última específicamente para probar las peticiones http a los diferentes recursos expuestos.
 
 A continuación un breve descripción de los endpoints accesibles:
 
