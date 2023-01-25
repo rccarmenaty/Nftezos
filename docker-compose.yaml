@@ -1,16 +1,5 @@
 version: "3.8"
 services:
-  # db:
-  #   image: postgres
-  #   environment:
-  #     DATABASE_HOST: 127.0.0.1
-  #     POSTGRES_PASSWORD: travelshare
-  #     POSTGRES_USER: postgres
-  #     POSTGRES_DB: travelshare
-  #   volumes:
-  #     - /var/lib/postgresql/data
-  #   ports:
-  #     - "5432:5432"
   db_test:
     image: postgres
     environment:
