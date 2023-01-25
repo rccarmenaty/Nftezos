@@ -38,3 +38,10 @@ En este hito se crea un entorno de pruebas utilizando contenedores, especificame
 
 En este hito se realizan la configuración necesaria para llevar a cabo la integración continua. Para ello se ha utilizado Travis y Github Actions.
 Para mas detalle ver [aquí](https://github.com/rccarmenaty/TravelShare/tree/hito4).
+
+## Hito 5
+
+### Diseño y Test de un Microservicio
+
+En este hito se desarrolla y amplían las funcinalidades de la API REST correspondiente a la aplicación, utilizando NodeJS y ExpressJS para el desarrollo de la api, y Jest y Supertest para la realización de las pruebas.
+Para mas detalle ver [aquí](https://github.com/rccarmenaty/TravelShare/tree/hito5).
