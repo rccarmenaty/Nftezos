@@ -11,6 +11,8 @@ const db = {};
 
 let sequelize;
 
+console.log(process.env.NODE_ENV);
+
 if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
@@ -21,8 +23,6 @@ if (config.use_env_variable) {
     config
   );
 }
-
-console.log(config);
 
 fs.readdirSync(__dirname)
   .filter((file) => {
