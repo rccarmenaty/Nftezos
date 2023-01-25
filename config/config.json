@@ -23,6 +23,13 @@
     "port": 5433,
     "dialect": "postgres"
   },
+  "github": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "travelshare",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
   "production": {
     "username": "root",
     "password": null,
