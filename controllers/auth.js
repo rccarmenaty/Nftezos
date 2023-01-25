@@ -134,7 +134,7 @@ exports.logout = async (req, res, next) => {
       uuid: user.uuid,
     },
     {
-      where: { id: user.uuid },
+      where: { uuid: user.uuid },
     }
   );
 

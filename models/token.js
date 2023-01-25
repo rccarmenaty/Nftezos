@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
   Token.init(
     {
       token: { type: DataTypes.STRING, allowNull: false },
-      uuid: { type: DataTypes.STRING, allowNull: false },
+      uuid: { type: DataTypes.UUID, allowNull: false },
     },
     {
       sequelize,
