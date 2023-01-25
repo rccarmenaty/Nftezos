@@ -32,6 +32,8 @@ En este hito se define el entorno que permite realizar las pruebas de software y
 
 En este hito se crea un entorno de pruebas utilizando contenedores, especificamente Docker. Se decide realizar dos implementaciones de un contenedor de Docker, uno en el que se parte de una imagen de la distro Alpine y sobre esta se ejecutan todos los servicios y se empaqueta la aplicación utilizando un `Dockerfile` como se muestra [aquí](https://github.com/rccarmenaty/TravelShare/tree/hito3), y luego se decide orquestar una infraestructura utlizando un contenedor de la base de datos de Postgres y orquestando todo con `docker-compose`, esta implementación se puede ver [aquí](https://github.com/rccarmenaty/TravelShare/tree/hito3.1).
 
+---
+
 ## Hito 4
 
 ### Integración continua
@@ -39,12 +41,16 @@ En este hito se crea un entorno de pruebas utilizando contenedores, especificame
 En este hito se realizan la configuración necesaria para llevar a cabo la integración continua. Para ello se ha utilizado Travis y Github Actions.
 Para mas detalle ver [aquí](https://github.com/rccarmenaty/TravelShare/tree/hito4).
 
+---
+
 ## Hito 5
 
 ### Diseño y Test de un Microservicio
 
 En este hito se desarrolla y amplían las funcinalidades de la API REST correspondiente a la aplicación, utilizando NodeJS y ExpressJS para el desarrollo de la api, y Jest y Supertest para la realización de las pruebas.
 Para mas detalle ver [aquí](https://github.com/rccarmenaty/TravelShare/tree/hito5).
+
+---
 
 ## Hito 6
 
