@@ -8,12 +8,14 @@ const {
   forgotpassword,
   resetpassword,
   info,
-  refreshToken,
+  logout,
 } = require("../controllers/auth");
 
 router.route("/register").post(register);
 
 router.route("/login").post(login);
+
+router.route("/logout").post(logout);
 
 router.route("/forgotpassword").post(forgotpassword);
 

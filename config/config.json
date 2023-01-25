@@ -3,7 +3,7 @@
     "username": "postgres",
     "password": "postgres",
     "database": "travelshare",
-    "host": "localhost",
+    "host": "db_test",
     "dialect": "postgres",
     "logging": false
   },
